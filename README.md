@@ -1,1 +1,2 @@
-# top-RockPaperScissor-2
+# The Odin Project : Rock, Paper & Scissor
+# Console Solution

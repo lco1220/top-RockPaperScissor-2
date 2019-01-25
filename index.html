@@ -12,9 +12,125 @@
 
 <body>
 
+  <h2>Let's play game. Rock, Paper & Scissor</h2>
   <h2>Use the console. Press ctrl + shift + k</h2>
 
   <script>
+
+    let playerScore = 0;
+    let computerScore = 0;
+
+    let playerAnswer;
+    let computerAnswer;
+    let round = 1;
+
+    function computerSelection() {
+      const choices = ['rock', 'paper', 'scissor'];
+      const randomNumber = Math.floor(Math.random() * 3);
+      computerAnswer = choices[randomNumber];
+      return computerAnswer;
+    }
+
+    function convertToText(string) {
+      let word = string.charAt(0).toUpperCase() + string.slice(1);
+      return word
+    }
+
+    function draw(user, computer) {
+      let text = `The players chose ${convertToText(user)}. It's a draw! `;
+      return text;
+    }
+
+    function lose(user, computer) {
+      computerScore++;
+      let text = `You Lose! Computer chose ${convertToText(computer)}. ${convertToText(computer)} beats ${convertToText(user)}.`;
+      return text;
+    }
+
+    function win(user, computer) {
+      playerScore++;
+      let text = `You Win! You chose ${convertToText(user)}. ${convertToText(user)} beats ${convertToText(computer)}.`;
+      return text;
+    }
+
+    function game(playerSelection, computerSelection) {
+      let resultText;
+      playerAnswer = playerSelection.toString().toLowerCase();
+
+      if (playerAnswer === 'rock' && computerAnswer === 'rock') {
+        resultText = draw(playerAnswer, computerAnswer);
+        return resultText;
+      } else if (playerAnswer === 'rock' && computerAnswer === 'paper') {
+        resultText = lose(playerAnswer, computerAnswer);
+        return resultText;
+      } else if (playerAnswer === 'rock' && computerAnswer === 'scissor') {
+        resultText = win(playerAnswer, computerAnswer);
+        return resultText;
+      } else if (playerAnswer === 'paper' && computerAnswer === 'rock') {
+        resultText = win(playerAnswer, computerAnswer);
+        return resultText;
+      } else if (playerAnswer === 'paper' && computerAnswer === 'paper') {
+        resultText = draw(playerAnswer, computerAnswer);
+        return resultText;
+      } else if (playerAnswer === 'paper' && computerAnswer === 'scissor') {
+        resultText = lose(playerAnswer, computerAnswer);
+        return resultText;
+      } else if (playerAnswer === 'scissor' && computerAnswer === 'scissor') {
+        resultText = draw(playerAnswer, computerAnswer);
+        return resultText;
+      } else if (playerAnswer === 'scissor' && computerAnswer === 'rock') {
+        resultText = lose(playerAnswer, computerAnswer);
+        return resultText;
+      } else if (playerAnswer === 'scissor' && computerAnswer === 'paper') {
+        resultText = win(playerAnswer, computerAnswer);
+        return resultText;
+      } else {
+        return "Error. Choose again.";
+      }
+    }
+
+    function checkScore(player, computer) {
+      if (player > computer) {
+        return `Final Score: ${player} : ${computer}. You win the match ! =)`;
+      } else if (player < computer) {
+        return `Final Score: ${player} : ${computer}. You lose the match ! =(`;
+      } else {
+        return `Final Score: ${player} : ${computer}. It's a draw ! =)`;
+      }
+    }
+
+    function gameConsole() {
+
+      for (let i = 1; i <= 4; i++) {
+        console.log(`Round: ${i}`);
+        console.log(`Player score: ${playerScore}`);
+        console.log(`Computer score: ${computerScore}`);
+
+        let playerChoice = prompt(`Please choose rock, paper & scissor.`);
+        console.log(game(playerChoice, computerSelection()));
+      }
+      console.log(`Last Round`);
+      console.log(`Player score: ${playerScore}`);
+      console.log(`Computer score: ${computerScore}`);
+      let playerChoice = prompt(`For the Last Round. Please choose rock, paper & scissor:`);
+      console.log(game(playerChoice, computerSelection()));
+
+      console.log(checkScore(playerScore, computerScore));
+
+      // while (round < 5) {
+      //   console.log(`Round: ${round}`);
+      //   console.log(`Player score: ${playerScore}`);
+      //   console.log(`Computer score: ${computerScore}`);
+      //   round++;
+      //   let playerChoice = prompt(`Please choose rock, paper & scissor.`);
+      //   console.log(game(playerChoice, computerSelection()));
+      // }
+
+      // console.log(checkScore(playerScore, computerScore));
+
+    }
+
+    console.log(gameConsole());
 
   </script>
 
